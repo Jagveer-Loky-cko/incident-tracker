@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .incident {
+            font-size: 32px;
+            margin: 10px 0;
+        }
+        .days {
+            font-size: 50px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">LAST INCIDENTS</div>
+        <div class="incident">SEV 1 <span class="days" id="sev1-days">--</span> DAYS</div>
+        <div class="incident">SEV 2 <span class="days" id="sev2-days">--</span> DAYS</div>
+    </div>
+
+    <script>
+        async function fetchIncidentData() {
+            // Replace with actual API request if needed
+            const sev1Days = Math.floor(Math.random() * 100); // Simulating incident days
+            const sev2Days = Math.floor(Math.random() * 100);
+
+            document.getElementById("sev1-days").innerText = sev1Days.toString().padStart(2, '0');
+            document.getElementById("sev2-days").innerText = sev2Days.toString().padStart(2, '0');
+        }
+
+        fetchIncidentData();
+        setInterval(fetchIncidentData, 60000); // Refresh every 60 seconds
+    </script>
+
+</body>
+</html>
