@@ -55,14 +55,28 @@
         <h1>LAST INCIDENTS</h1>
         <div class="incident">
             <span class="label">SEV 1</span>
-            <span class="digits">030</span>
+            <span class="digits" id="sev1-days">030</span>
             <span class="days">DAYS</span>
         </div>
         <div class="incident">
             <span class="label">SEV 2</span>
-            <span class="digits">054</span>
+            <span class="digits" id="sev2-days">054</span>
             <span class="days">DAYS</span>
         </div>
     </div>
+
+    <script>
+        async function fetchIncidentData() {
+            // Replace with actual API request if needed
+            const sev1Days = Math.floor(Math.random() * 100); // Simulating incident days
+            const sev2Days = Math.floor(Math.random() * 100);
+
+            document.getElementById("sev1-days").innerText = sev1Days.toString().padStart(2, '0');
+            document.getElementById("sev2-days").innerText = sev2Days.toString().padStart(2, '0');
+        }
+
+        fetchIncidentData();
+        setInterval(fetchIncidentData, 60000); // Refresh every 60 seconds
+    </script>
 </body>
 </html>
