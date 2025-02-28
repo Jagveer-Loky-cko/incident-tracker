@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Display</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+        body {
+            background-color: #2A3B50;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 80px;
+            letter-spacing: 5px;
+        }
+        .incident {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .label, .days {
+            font-size: 60px;
+            margin: 0 20px;
+        }
+        .digits {
+            font-size: 120px;
+            color: #FF4500;
+            background: black;
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LAST INCIDENTS</h1>
+        <div class="incident">
+            <span class="label">SEV 1</span>
+            <span class="digits" id="sev1-days">03</span>
+            <span class="days">DAYS</span>
+        </div>
+        <div class="incident">
+            <span class="label">SEV 2</span>
+            <span class="digits" id="sev2-days">01</span>
+            <span class="days">DAYS</span>
+        </div>
+    </div>
+
+    <script>
+        function getStoredDays(severity, defaultDays) {
+            const storedDays = localStorage.getItem(severity);
+            if (storedDays) {
+                return parseInt(storedDays, 10);
+            } else {
+                localStorage.setItem(severity, defaultDays);
+                return defaultDays;
+            }
+        }
+
+        function updateIncidentData() {
+            let sev1Days = getStoredDays("sev1-days", 3);
+            let sev2Days = getStoredDays("sev2-days", 1);
+            
+            sev1Days += 1;
+            sev2Days += 1;
+            
+            localStorage.setItem("sev1-days", sev1Days);
+            localStorage.setItem("sev2-days", sev2Days);
+
+            document.getElementById("sev1-days").innerText = sev1Days.toString().padStart(2, '0');
+            document.getElementById("sev2-days").innerText = sev2Days.toString().padStart(2, '0');
+        }
+
+        updateIncidentData();
+        setInterval(updateIncidentData, 86400000); // Increase count every 24 hours
+    </script>
+</body>
+</html>
